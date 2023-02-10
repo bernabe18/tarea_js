@@ -1,0 +1,7 @@
+#logo{
+    width: 120px;
+}
+.lista_nav , a{
+    list-style-type: none;
+    text-decoration: none;
+}
