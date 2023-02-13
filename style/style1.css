@@ -1,7 +1,113 @@
-#logo{
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, blue, rgb(156, 156, 223));
+}
+
+#logo {
     width: 120px;
 }
-.lista_nav , a{
+
+#active {
+    background-color: rgb(34, 63, 229);
+}
+
+header {
+
+    display: flex;
+    height: 85px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+#arrow {
+
+    font-size: xx-large;
+}
+
+.lista_r ul li,
+a,
+#category ul li {
     list-style-type: none;
     text-decoration: none;
+    display: inline-block;
+}
+
+#verm {
+    margin: 20px;
+    box-shadow: -8px -8px 9px rgb(56, 56, 218);
+}
+
+
+#titulo {
+    text-align: center;
+}
+
+footer {
+    position: relative;
+    top: 100px;
+    background-color: rgb(20, 19, 19);
+    width: 100%;
+    height: 55px;
+}
+
+.redes>i {
+    color: rgb(186, 181, 181);
+    font-size: xx-large;
+}
+
+#category ul li {
+    color: rgb(199, 245, 245);
+}
+
+form {
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.form-label {
+    margin: 10px;
+    width: 26rem;
+}
+
+span {
+    color: white;
+}
+
+button {
+    width: 90px;
+    border-radius: 50px;
+}
+
+.box_arrow {
+    height: 67px;
+    padding: 14px;
+}
+
+.box_arrow a {
+    color: rgb(10, 8, 8);
+}
+
+table.table.table-dark.table-bordered {
+    margin: auto;
+    width: auto;
+}
+
+.card {
+    height: 414px;
+    width: 652px;
+    margin: auto;
+    padding: 118px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: -webkit-fill-available;
 }
