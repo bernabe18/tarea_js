@@ -1,10 +1,10 @@
 // En el home.html deben haber tantas tarjetas como eventos haya en el array de eventos.
+
 let fragment = document.createDocumentFragment();
 let cards = document.getElementById("cards");
 cards.className = "row m-3";
 
-
-for (const events of allEvents) {
+for (const events of eventPast) {
 //creando elementos
     let card_c = document.createElement("div");
     let card_cc = document.createElement("div")
@@ -35,7 +35,6 @@ for (const events of allEvents) {
     descripcion.textContent = events.description;
     precio.textContent = "Precio $ " + events.price;
 
-//agregando 
     card_c.appendChild(imagen);
     card_cc.appendChild(titulo);
     card_cc.appendChild(descripcion);

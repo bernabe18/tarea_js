@@ -1,11 +1,6 @@
+// Recorrer array eventos y obtener la fecha base de referencia y la fecha del evento para ver si es past o upcoming event. (evento pasado | evento futuro)
 
-//   Reemplazar las cards con información estática por cards con información dinámicas utilizando  los datos del archivo que nos mando el cliente
 
-// 🔸Recorrer array eventos y obtener la fecha base de referencia y la fecha del evento para ver si es past o upcoming event. (evento pasado | evento futuro)
-
-// 🔸En el home.html deben haber tantas tarjetas como eventos haya en el array de eventos.
-
-// 🔸Podrán observar que PAST y UPCOMMING tienen 7 eventos cada uno, imprimir los templates en el html.
 var data = {
   "currentDate": "2022-01-01",
   "events": [
@@ -179,31 +174,26 @@ var data = {
     }
   ]
 };
-
 let eventPast = [];
 let upcomingEvent = [];
 let allEvents = [];
 
+// si cambio la fecha me cambia la fecha base
+// const currentDate =new Date(data.currentDate);
 const currentDate = data.currentDate;
 
 // Recorrer array eventos y obtener la fecha base de referencia y la fecha del evento para ver si es past o upcoming event. (evento pasado | evento futuro)
-for (let i = 0; i < data.events.length ; i++) {
+for (let i = 0; i < data.events.length; i++) {
   let element = data.events[i];
   allEvents.push(element)
 
-  if (currentDate<=element.date) {
+  if (currentDate <= element.date) {
+
     eventPast.push(element);
-  }else{
+  } else {
+
     upcomingEvent.push(element);
   }
 }
 
-// En el home.html deben haber tantas tarjetas como eventos haya en el array de eventos.
-allEvents.forEach(_id => {
-  console.log(_id);
-});
-
-
-
-//Podrán observar que PAST y UPCOMMING tienen 7 eventos cada uno, imprimir los templates en el html.
 
