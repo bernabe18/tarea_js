@@ -1,51 +1,31 @@
 // En el home.html deben haber tantas tarjetas como eventos haya en el array de eventos.
 let fragment = document.createDocumentFragment();
+let Contenedorcategory = document.getElementById("category");
 let cards = document.getElementById("cards");
+let box_check = document.querySelectorAll(".box_check");
 cards.className = "row m-3";
 
 
-for (const events of allEvents) {
-//creando elementos
-    let card_c = document.createElement("div");
-    let card_cc = document.createElement("div")
-    let imagen = document.createElement("img");
-    let titulo = document.createElement("h5");
-    let descripcion = document.createElement("p");
-    let precio = document.createElement("span");
-    let verMas = document.createElement("a");
+//1- Incorporar filtros por input search y checkbox por categorías.
+let checkboxButtons = document.querySelectorAll(".checkbox");
+box_check.forEach(checkbox => checkbox.addEventListener("click", filtrarCards));
 
-//agregando valores y clases bootstrap
-    card_c.className = "card m-1 p-2";
-    titulo.className = "card-title";
-    card_cc.className = "card-body";
-    verMas.className = "btn btn-primary";
-    verMas.textContent = "Ver mas"
-    verMas.href = "./Details.html"
-    imagen.className = "card-img-top";
+crearTarjeta(allEvents);
+filtrarCheck(allEvents);
 
-//stilos
-    card_c.style.width = "18rem";
-    precio.style.color = "black";
-    descripcion.style.color = "black";
-    verMas.style.margin="15px";
+//esta funcion sirve para comparar el valor de check en los filtro y trae los eventos segun su categoria
+function filtrarCards(e) {
 
-//asignando data de los eventos
-    imagen.src = events.image;
-    titulo.textContent = events.name;
-    descripcion.textContent = events.description;
-    precio.textContent = "Precio $ " + events.price;
+  if (e.target.checked) {
 
-//agregando 
-    card_c.appendChild(imagen);
-    card_cc.appendChild(titulo);
-    card_cc.appendChild(descripcion);
-    card_cc.appendChild(precio);
-    card_cc.appendChild(verMas);
+    checkSelects.push(e.target.value);
+    filtrarCheckBox(allEvents, checkSelects);
 
+  } else {
 
-    card_c.appendChild(card_cc);
-    fragment.appendChild(card_c);
+    let DcheckSelects = checkSelects.filter(item => item !== e.target.value);
+    checkSelects = DcheckSelects;
+    filtrarCheckBox(allEvents, checkSelects);
+  }
+  return checkSelects;
 }
-
-cards.appendChild(fragment);
-

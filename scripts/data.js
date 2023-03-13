@@ -174,9 +174,17 @@ var data = {
     }
   ]
 };
+
+//array de eventos segun corresponda
 let eventPast = [];
 let upcomingEvent = [];
 let allEvents = [];
+
+//arrays de funciones
+let concidenciasArr = [];
+let categoriaFilter = [];
+let checkSelects = [];
+
 
 // si cambio la fecha me cambia la fecha base
 // const currentDate =new Date(data.currentDate);
@@ -188,12 +196,140 @@ for (let i = 0; i < data.events.length; i++) {
   allEvents.push(element)
 
   if (currentDate <= element.date) {
-
     eventPast.push(element);
   } else {
-
     upcomingEvent.push(element);
   }
 }
 
+//funcion para que se muestre las categorias
+function crearCategoria(categoria) {
 
+  for (let i = 0; i < categoria.length; i++) {
+
+    let listaC = document.getElementById("listac");
+    let li = document.createElement("li");
+    let label = document.createElement("label");
+    let input = document.createElement("input");
+    let span = document.createElement("span");
+
+    input.type = "checkbox";
+    span.innerText = categoria;
+    input.value=categoria;
+    li.className = "p-2";
+
+    //estilo
+    span.style.margin = "5px";
+
+    listaC.appendChild(li);
+    li.appendChild(label);
+    label.appendChild(span);
+    label.appendChild(input);
+  }
+   return categoria;
+}
+
+//funcion para crear tarjeat
+function crearTarjeta(events) {
+
+  for (const event of events) {
+    //creando elementos
+    let card_c = document.createElement("div");
+    let card_cc = document.createElement("div")
+    let imagen = document.createElement("img");
+    let titulo = document.createElement("h5");
+    let descripcion = document.createElement("p");
+    let precio = document.createElement("span");
+    let verMas = document.createElement("a");
+
+    //agregando valores y clases bootstrap
+    card_c.className = "card m-1 p-2";
+    titulo.className = "card-title";
+    card_cc.className = "card-body";
+    verMas.className = "btn btn-primary";
+    verMas.textContent = "Ver mas"
+    verMas.href = "./Details.html"
+    imagen.className = "card-img-top";
+
+    //stilos
+    card_c.style.width = "18rem";
+    precio.style.color = "black";
+    descripcion.style.color = "black";
+    verMas.style.margin = "15px";
+
+    //asignando data de los eventos
+    imagen.src = event.image;
+    titulo.textContent = event.name;
+    descripcion.textContent = event.description;
+    precio.textContent = "Precio $ " + event.price;
+
+    //agregando 
+    card_c.appendChild(imagen);
+    card_cc.appendChild(titulo);
+    card_cc.appendChild(descripcion);
+    card_cc.appendChild(precio);
+    card_cc.appendChild(verMas);
+
+
+    card_c.appendChild(card_cc);
+    fragment.appendChild(card_c);
+  }
+
+  cards.appendChild(fragment);
+}
+
+
+//esta funcion es para mostar cards un array segun el filtro al que le haga check
+function filtrarCheckBox(arrEvent, arrInputs) {
+
+  if (arrInputs.length === 0) {
+    cards.innerHTML=""
+    crearTarjeta(arrEvent);
+  } else {
+    cards.innerHTML=""
+    concidenciasArr = [];
+      arrEvent.forEach(element => {
+
+        for (const input of arrInputs) {
+          if (element.category == input) {
+            concidenciasArr.push(element);
+          }
+        }
+      });
+    crearTarjeta(concidenciasArr);
+  }
+}
+
+// esta funcion sirve para que los check no se repitan
+function filtrarCheck(arr){
+
+  arr.forEach((event) => {
+  if (!categoriaFilter.includes(event.category)) {
+    categoriaFilter = []
+    categoriaFilter.push(event.category);
+    crearCategoria(categoriaFilter);
+  }
+});
+}
+
+
+  
+//1- Incorporar filtros por input search y checkbox por categorías.
+
+//2- Los filtros deben funcionar tanto de forma independiente como combinada.
+
+//3- En caso de que no se encuentre ningún evento con los filtros, se debe pedir al usuario que ajuste los filtros para encontrar un evento.
+
+//4- Los filtros deben estar presentes en las páginas Inicio, Eventos pasados y Eventos futuros.
+
+//5- Al hacer clic en la tarjeta del evento, éste debe aparecer en la página Detalle.
+
+// RECOMENDACIONES:
+
+// Incorpore entradas de búsqueda y casillas de verificación de categorías en sus páginas de Inicio, Eventos pasados y Eventos futuros.
+
+// Te aconsejamos que empieces por el input de búsqueda, capturando los datos que el usuario teclee en este, ordenando la cadena que has capturado y pasándola a minúsculas, después filtra estos datos con el nombre del evento del fichero de datos también pasado a minúsculas para igualar los valores y finalmente guarda el array resultante del filtro para mostrarlo en tu html.
+
+// Para las casillas de verificación, te aconsejamos que extraigas las categorías dinámicamente del fichero de datos del evento, elimines las repetidas para obtener un único valor para cada una y luego con el array resultante del filtro lo muestres en tu html.
+
+// Para que los filtros funcionen en combinación, define condicionales que evalúen si la entrada tiene un valor o si las casillas de verificación están marcadas.
